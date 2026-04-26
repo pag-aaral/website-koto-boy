@@ -10,7 +10,13 @@ localStorage.setItem("update",Date.now());
 
 /* REALTIME SYNC */
 setInterval(()=>{
-db = JSON.parse(localStorage.getItem("db")) || {schedule:[],messages:[]};
-if(typeof renderAdmin==="function") renderAdmin();
-if(typeof renderStudent==="function") renderStudent();
+
+db = JSON.parse(localStorage.getItem("db")) || {
+schedule:[],
+messages:[]
+};
+
+if(typeof renderAdmin === "function") renderAdmin();
+if(typeof renderStudent === "function") renderStudent();
+
 },800);
