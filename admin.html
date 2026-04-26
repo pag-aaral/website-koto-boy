@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="sidebar">
+<h2>Admin</h2>
+<button onclick="location='index.html'">Logout</button>
+</div>
+
+<div class="main">
+
+<div class="card">
+<h3>Add Class</h3>
+
+<input id="subject">
+<input id="start">
+<input id="end">
+
+<button class="green" onclick="add()">Add</button>
+</div>
+
+<div class="card">
+<h3>Schedule</h3>
+<table>
+<tbody id="schedule"></tbody>
+</table>
+</div>
+
+<div class="card">
+<h3>Messages</h3>
+<ul id="messages"></ul>
+</div>
+
+</div>
+
+<script src="app.js"></script>
+
+<script>
+
+function add(){
+
+db.schedule.push({
+subject:subject.value,
+start:start.value,
+end:end.value,
+status:"pending"
+});
+
+save();
+renderAdmin();
+}
+
+/* ACTIONS */
+function done(i){
+db.schedule[i].status="done";
+save();
+}
+
+function cancel(i){
+db.schedule[i].status="cancel";
+save();
+}
+
+function del(i){
+db.schedule.splice(i,1);
+save();
+}
+
+/* RENDER */
+function renderAdmin(){
+
+schedule.innerHTML="";
+messages.innerHTML="";
+
+db.schedule.forEach((s,i)=>{
+schedule.innerHTML+=`
+<tr>
+<td>${s.subject}</td>
+<td>${s.start}-${s.end}</td>
+<td>
+<button class="green" onclick="done(${i})">✔</button>
+<button class="red" onclick="cancel(${i})">❌</button>
+<button onclick="del(${i})">X</button>
+</td>
+</tr>`;
+});
+
+db.messages.forEach(m=>{
+messages.innerHTML+=`<li>${m}</li>`;
+});
+}
+
+renderAdmin();
+
+</script>
+
+</body>
+</html>
