@@ -18,14 +18,23 @@ const messagesRef = db.collection("messages");
 
 /* ADD CLASS (ADMIN) */
 function add() {
-  scheduleRef.add({
-    subject: subject.value,
-    start: start.value,
-    end: end.value,
+  let subject = document.getElementById("subject").value;
+  let start = document.getElementById("start").value;
+  let end = document.getElementById("end").value;
+
+  if (!subject || !start || !end) return;
+
+  db.collection("schedule").add({
+    subject: subject,
+    start: start,
+    end: end,
     status: "pending"
   });
-}
 
+  document.getElementById("subject").value = "";
+  document.getElementById("start").value = "";
+  document.getElementById("end").value = "";
+}
 /* SEND MESSAGE (STUDENT) */
 function send() {
   let msg = document.getElementById("msg");
