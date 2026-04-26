@@ -27,6 +27,11 @@
 <button class="blue" onclick="send()">Send</button>
 </div>
 
+<div class="card">
+<h3>Messages</h3>
+<ul id="messages"></ul>
+</div>
+
 </div>
 
 <script src="app.js"></script>
@@ -34,8 +39,9 @@
 <script>
 
 function send(){
+let msg = document.getElementById("msg");
 db.messages.push(msg.value);
-msg.value="";
+msg.value = "";
 save();
 }
 
@@ -57,6 +63,13 @@ schedule.innerHTML+=`
 <td>${status}</td>
 </tr>`;
 });
+
+/* messages */
+let messagesBox = document.getElementById("messages");
+if(messagesBox){
+messagesBox.innerHTML = db.messages.map(m => `<li>${m}</li>`).join("");
+}
+
 }
 
 renderStudent();
