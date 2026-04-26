@@ -44,10 +44,10 @@
 function add(){
 
 db.schedule.push({
-subject:subject.value,
-start:start.value,
-end:end.value,
-status:"pending"
+subject: subject.value,
+start: start.value,
+end: end.value,
+status: "pending"
 });
 
 save();
@@ -58,16 +58,19 @@ renderAdmin();
 function done(i){
 db.schedule[i].status="done";
 save();
+renderAdmin();
 }
 
 function cancel(i){
 db.schedule[i].status="cancel";
 save();
+renderAdmin();
 }
 
 function del(i){
 db.schedule.splice(i,1);
 save();
+renderAdmin();
 }
 
 /* RENDER */
@@ -92,6 +95,7 @@ schedule.innerHTML+=`
 db.messages.forEach(m=>{
 messages.innerHTML+=`<li>${m}</li>`;
 });
+
 }
 
 renderAdmin();
