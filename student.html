@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="sidebar">
+<h2>Student</h2>
+<button onclick="location='index.html'">Logout</button>
+</div>
+
+<div class="main">
+
+<div class="card">
+<h3>My Classes</h3>
+
+<table>
+<tbody id="schedule"></tbody>
+</table>
+</div>
+
+<div class="card">
+<h3>Send Message</h3>
+<input id="msg">
+<button class="blue" onclick="send()">Send</button>
+</div>
+
+</div>
+
+<script src="app.js"></script>
+
+<script>
+
+function send(){
+db.messages.push(msg.value);
+msg.value="";
+save();
+}
+
+/* RENDER */
+function renderStudent(){
+
+schedule.innerHTML="";
+
+db.schedule.forEach(s=>{
+
+let status="⏳";
+if(s.status==="done") status="✔ Done";
+if(s.status==="cancel") status="❌ No Class";
+
+schedule.innerHTML+=`
+<tr>
+<td>${s.subject}</td>
+<td>${s.start}-${s.end}</td>
+<td>${status}</td>
+</tr>`;
+});
+}
+
+renderStudent();
+
+</script>
+
+</body>
+</html>

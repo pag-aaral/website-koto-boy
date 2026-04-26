@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="main">
+
+<div class="card">
+<h2>Login</h2>
+
+<input id="user" placeholder="username"><br>
+<input id="pass" type="password" placeholder="password"><br>
+
+<button class="blue" onclick="login()">Login</button>
+</div>
+
+</div>
+
+<script src="app.js"></script>
+
+<script>
+function login(){
+
+if(user.value==="admin" && pass.value==="123"){
+location="admin.html";
+}
+
+else if(user.value==="student" && pass.value==="123"){
+location="student.html";
+}
+
+else alert("Wrong login");
+}
+</script>
+
+</body>
+</html>
